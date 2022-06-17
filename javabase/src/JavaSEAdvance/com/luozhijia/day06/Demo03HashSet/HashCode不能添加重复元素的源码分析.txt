@@ -1,0 +1,86 @@
+public static void main(String[] args) {
+        HashSet<String> hs = new HashSet<String>();
+        //存储元素
+        hs.add("hello");
+        hs.add("word");
+        hs.add("world");
+        hs.add("java");
+        }
+//调用add 方法 e = 需要添加的元素
+public boolean add(E e) {
+         //调用put方法
+        return map.put(e, PRESENT)==null;
+    }
+//put方法传入两个参数 e --> key
+public V put(K key, V value) {
+        //这里调用hash()方法传入key
+        return putVal(hash(key), key, value, false, true);
+                //这里接受到哈希值，第二个元素key -- > 就是需要添加的元素
+                //调用putVal方法
+    }
+
+//Object key --> 是put方法里的key
+static final int hash(Object key) {
+        int h;
+                                  //根据hashCode()方法生成了一个key的哈希值，并返回(回到put方法)
+        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+    }
+
+//接受到传入的值
+//hash --> hash(key)   key --> key(put方法中的key)
+final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+                   boolean evict) {
+        //tab列表         //结点p K--> key(需要存储的元素)
+        Node<K,V>[] tab; Node<K,V> p; int n, i;
+        //判断列表是否为空
+        //不为空来到else
+        if ((tab = table) == null || (n = tab.length) == 0)
+            n = (tab = resize()).length;
+
+        if ((p = tab[i = (n - 1) & hash]) == null)
+            tab[i] = newNode(hash, key, value, null);
+        //进入else
+        else {
+            Node<K,V> e; K k;
+
+            //判断结点p中的哈希值是否存在在列表中
+            //如果不存在进入else
+            if (p.hash == hash &&
+                //将p的key值赋值给k 判断列表中key.equals(k)，比较内容是否相同
+                //不相同进入else
+                ((k = p.key) == key || (key != null && key.equals(k))))
+                //相同，没有添加元素
+                e = p;
+
+            else if (p instanceof TreeNode)
+                e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
+
+            //添加元素
+            else {
+                for (int binCount = 0; ; ++binCount) {
+                    if ((e = p.next) == null) {
+                        p.next = newNode(hash, key, value, null);
+                        if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                            treeifyBin(tab, hash);
+                        break;
+                    }
+                    if (e.hash == hash &&
+                        ((k = e.key) == key || (key != null && key.equals(k))))
+                        break;
+                    p = e;
+                }
+            }
+            if (e != null) { // existing mapping for key
+                V oldValue = e.value;
+                if (!onlyIfAbsent || oldValue == null)
+                    e.value = value;
+                afterNodeAccess(e);
+                return oldValue;
+            }
+        }
+        ++modCount;
+        if (++size > threshold)
+            resize();
+        afterNodeInsertion(evict);
+        return null;
+    }
