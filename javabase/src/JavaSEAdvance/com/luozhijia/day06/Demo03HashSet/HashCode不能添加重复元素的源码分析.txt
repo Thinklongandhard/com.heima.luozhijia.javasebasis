@@ -7,29 +7,29 @@ public static void main(String[] args) {
         hs.add("java");
         }
 //调用add 方法 e = 需要添加的元素
-public boolean add(E e) {
+public boolean add(E e) {  e-->word
          //调用put方法
         return map.put(e, PRESENT)==null;
     }
 //put方法传入两个参数 e --> key
-public V put(K key, V value) {
+public V put(K key, V value) {  key --> e
         //这里调用hash()方法传入key
-        return putVal(hash(key), key, value, false, true);
+        return putVal([hash(key)], key, value, false, true);
                 //这里接受到哈希值，第二个元素key -- > 就是需要添加的元素
                 //调用putVal方法
     }
 
 //Object key --> 是put方法里的key
-static final int hash(Object key) {
-        int h;
+static final int [hash(Object key)] {
+        int hash;
                                   //根据hashCode()方法生成了一个key的哈希值，并返回(回到put方法)
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        return (key == null) ? 0 : [(h = key.hashCode()) ]^ (h >>> 16);
     }
 
 //接受到传入的值
 //hash --> hash(key)   key --> key(put方法中的key)
-final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-                   boolean evict) {
+final V putVal [ (int hash, K key, V value, boolean onlyIfAbsent,
+                   boolean evict) ]{
         //tab列表         //结点p K--> key(需要存储的元素)
         Node<K,V>[] tab; Node<K,V> p; int n, i;
         //判断列表是否为空
