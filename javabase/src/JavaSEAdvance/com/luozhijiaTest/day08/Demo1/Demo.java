@@ -55,10 +55,10 @@ public class Demo {
 //            System.out.print(it + " ");
 //        }
         List<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i < arr.size(); i++) {
-            list.add(arr.get(i));
-        }
-        System.out.println(list);
+//        for (int i = 0; i < arr.size(); i++) {
+//            list.add(arr.get(i));
+//        }
+//        System.out.println(list);
 
 
 
