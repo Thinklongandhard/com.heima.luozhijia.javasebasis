@@ -73,6 +73,7 @@
                 <when test="companyName != null and companyName != ''">
                     company_name like #{companyName}
                 </when>
+
             </choose>
         </where>
     </select>
@@ -109,6 +110,14 @@
         </set>
         where
           id = #{id};
+    </update>
+
+    <!--添加元素-->
+    <update id="Insert" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_brand
+            (status,brand_name,company_name,ordered,description)
+        values
+            (#{status},#{brandName},#{companyName},#{ordered},#{description});
     </update>
 
 

@@ -25,6 +25,8 @@ public interface BrandMapper {
     //动态修改属性
     int Update(Brand brand);
 
+    void Insert(Brand brand);
+
 
     /**
      * 批量删除元素
