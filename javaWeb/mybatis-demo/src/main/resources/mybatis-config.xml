@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--  类型别名  -->
+    <typeAliases>
+        <!-- 扫描com.lzj.pojo下的所有类名 -->
+        <package name="com.lzj.pojo"/>
+        <!-- 扫描过去在UserMapper配置文件中返回值类型就简化了，只需要写类名即可，不区分大小写 -->
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!--mybatis的核心配置文件-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///mybatis?useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="681219"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!-- 映射sql语句的配置文件路径 -->
+        <mapper resource="com/lzj/mapper/UserMapper.xml"/>
+        <mapper resource="com/lzj/mapper/DropMapper.xml"/>
+        <mapper resource="com/lzj/mapper/AddMapper.xml"/>
+        <mapper resource="com/lzj/mapper/BrandMapper.xml" />
+    </mappers>
+</configuration>

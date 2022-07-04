@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+  namespace: 是名称空间
+  select id是该条SQL语句的唯一标识，但是在开发过程中，会有很多不同的Mapper配置文件
+  每个配置文件中都有对应的select id 的标识，所以我们定义一个名称空间用来指向不同的
+  Mapper配置文件中的不同sql标识
+  username 	 password	 gender	 addr
+-->
+<mapper namespace="com.lzj.mapper.AddMapper">
+    <!-- select id SQL语句的唯一标识   resultType 该条语句返回的类型 -->
+    <select id="addone" resultType="Inte">
+        insert into tb_user (username,password,gender,addr) values ('李四','46','女','河南');
+    </select>
+</mapper>
